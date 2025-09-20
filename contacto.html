@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto • Clínica Dental</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { dental: '#1D4ED8' }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col items-center">
+
+  <header class="text-center my-10">
+    <h1 class="text-4xl font-bold text-dental mb-2">Contáctanos</h1>
+    <p class="text-gray-700">Estamos aquí para responder tus dudas y agendar tu cita</p>
+  </header>
+
+  <main class="w-full max-w-xl bg-white p-6 rounded-lg shadow-lg mb-10">
+    <form id="contactForm" class="flex flex-col gap-4">
+      <input type="text" placeholder="Nombre completo" class="border p-3 rounded-md focus:outline-dental focus:ring-2 focus:ring-dental" required>
+      <input type="email" placeholder="Correo electrónico" class="border p-3 rounded-md focus:outline-dental focus:ring-2 focus:ring-dental" required>
+      <input type="tel" placeholder="Teléfono" class="border p-3 rounded-md focus:outline-dental focus:ring-2 focus:ring-dental" required>
+      <textarea placeholder="Mensaje" class="border p-3 rounded-md focus:outline-dental focus:ring-2 focus:ring-dental" rows="4" required></textarea>
+      <button type="submit" class="bg-dental text-white p-3 rounded-md hover:bg-blue-700 transition">Enviar Mensaje</button>
+    </form>
+    <p id="msgSuccess" class="text-green-600 mt-4 hidden">¡Mensaje enviado con éxito!</p>
+  </main>
+
+  <footer class="mt-10 text-gray-500 mb-10">
+    <a href="./index.html" class="text-dental font-semibold hover:underline">← Volver al inicio</a>
+  </footer>
+
+  <script>
+    // Guardar mensajes en localStorage
+    const form = document.getElementById('contactForm');
+    const msgSuccess = document.getElementById('msgSuccess');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const contacto = {
+        nombre: form[0].value,
+        email: form[1].value,
+        telefono: form[2].value,
+        mensaje: form[3].value,
+        fecha: new Date().toLocaleString()
+      };
+
+      // Guardar en localStorage
+      const mensajes = JSON.parse(localStorage.getItem('mensajes')) || [];
+      mensajes.push(contacto);
+      localStorage.setItem('mensajes', JSON.stringify(mensajes));
+
+      msgSuccess.classList.remove('hidden');
+      form.reset();
+
+      setTimeout(() => {
+        msgSuccess.classList.add('hidden');
+      }, 3000);
+    });
+  </script>
+
+</body>
+</html>

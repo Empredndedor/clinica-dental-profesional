@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Servicios • Clínica Dental</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { dental: '#1D4ED8' }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col items-center">
+
+  <header class="text-center my-10">
+    <h1 class="text-4xl font-bold text-dental mb-2">Nuestros Servicios</h1>
+    <p class="text-gray-700">Tratamientos dentales profesionales para tu sonrisa</p>
+  </header>
+
+  <main class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4">
+    <div class="bg-white p-6 rounded-lg shadow-lg text-center hover:shadow-xl transition">
+      <h2 class="text-2xl font-semibold mb-2">Limpieza Dental</h2>
+      <p>Elimina placa y sarro para mantener tus dientes sanos.</p>
+    </div>
+
+    <div class="bg-white p-6 rounded-lg shadow-lg text-center hover:shadow-xl transition">
+      <h2 class="text-2xl font-semibold mb-2">Ortodoncia</h2>
+      <p>Corrige la alineación de tus dientes con brackets o invisalign.</p>
+    </div>
+
+    <div class="bg-white p-6 rounded-lg shadow-lg text-center hover:shadow-xl transition">
+      <h2 class="text-2xl font-semibold mb-2">Blanqueamiento</h2>
+      <p>Recupera la blancura natural de tu sonrisa de manera segura.</p>
+    </div>
+
+    <div class="bg-white p-6 rounded-lg shadow-lg text-center hover:shadow-xl transition">
+      <h2 class="text-2xl font-semibold mb-2">Endodoncia</h2>
+      <p>Tratamientos de conductos para salvar tus dientes dañados.</p>
+    </div>
+
+    <div class="bg-white p-6 rounded-lg shadow-lg text-center hover:shadow-xl transition">
+      <h2 class="text-2xl font-semibold mb-2">Implantes Dentales</h2>
+      <p>Reemplaza dientes faltantes con implantes duraderos y estéticos.</p>
+    </div>
+  </main>
+
+  <footer class="mt-10 text-gray-500 mb-10">
+    <a href="./index.html" class="text-dental font-semibold hover:underline">← Volver al inicio</a>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reservar Cita • Clínica Dental</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { dental: '#1D4ED8' }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col items-center">
+
+  <header class="text-center my-10">
+    <h1 class="text-4xl font-bold text-dental mb-2">Reservar Cita</h1>
+    <p class="text-gray-700">Elige tu tratamiento y agenda tu cita</p>
+  </header>
+
+  <main class="w-full max-w-xl bg-white p-6 rounded-lg shadow-lg mb-10">
+    <form id="citaForm" class="flex flex-col gap-4">
+      <input type="text" placeholder="Nombre completo" class="border p-3 rounded-md focus:outline-dental focus:ring-2 focus:ring-dental" required>
+      <input type="tel" placeholder="Teléfono" class="border p-3 rounded-md focus:outline-dental focus:ring-2 focus:ring-dental" required>
+
+      <select class="border p-3 rounded-md focus:outline-dental focus:ring-2 focus:ring-dental" required>
+        <option value="" disabled selected>Selecciona el servicio</option>
+        <option value="Limpieza Dental">Limpieza Dental</option>
+        <option value="Ortodoncia">Ortodoncia</option>
+        <option value="Blanqueamiento">Blanqueamiento</option>
+        <option value="Endodoncia">Endodoncia</option>
+        <option value="Implantes Dentales">Implantes Dentales</option>
+      </select>
+
+      <input type="date" class="border p-3 rounded-md focus:outline-dental focus:ring-2 focus:ring-dental" required>
+      <input type="time" class="border p-3 rounded-md focus:outline-dental focus:ring-2 focus:ring-dental" required>
+
+      <button type="submit" class="bg-dental text-white p-3 rounded-md hover:bg-blue-700 transition">Reservar Cita</button>
+    </form>
+
+    <div id="msgSuccess" class="text-green-600 mt-4 hidden">¡Cita reservada con éxito!</div>
+    <div id="turnoInfo" class="mt-4 p-4 bg-green-100 rounded-md hidden">
+      <p><strong>Nombre:</strong> <span id="nombreTurno"></span></p>
+      <p><strong>Servicio:</strong> <span id="servicioTurno"></span></p>
+      <p><strong>Fecha y Hora:</strong> <span id="fechaHoraTurno"></span></p>
+    </div>
+  </main>
+
+  <footer class="mt-10 text-gray-500 mb-10">
+    <a href="./index.html" class="text-dental font-semibold hover:underline">← Volver al inicio</a>
+  </footer>
+
+  <script>
+    const citaForm = document.getElementById('citaForm');
+    const msgSuccess = document.getElementById('msgSuccess');
+    const turnoInfo = document.getElementById('turnoInfo');
+    const nombreTurno = document.getElementById('nombreTurno');
+    const servicioTurno = document.getElementById('servicioTurno');
+    const fechaHoraTurno = document.getElementById('fechaHoraTurno');
+
+    citaForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const cita = {
+        nombre: citaForm[0].value,
+        telefono: citaForm[1].value,
+        servicio: citaForm[2].value,
+        fecha: citaForm[3].value,
+        hora: citaForm[4].value,
+        fechaRegistro: new Date().toLocaleString()
+      };
+
+      // Guardar en localStorage
+      const citas = JSON.parse(localStorage.getItem('citas')) || [];
+      citas.push(cita);
+      localStorage.setItem('citas', JSON.stringify(citas));
+
+      // Mostrar confirmación
+      msgSuccess.classList.remove('hidden');
+
+      // Mostrar resumen de la cita
+      nombreTurno.textContent = cita.nombre;
+      servicioTurno.textContent = cita.servicio;
+      fechaHoraTurno.textContent = `${cita.fecha} a las ${cita.hora}`;
+      turnoInfo.classList.remove('hidden');
+
+      // Limpiar formulario
+      citaForm.reset();
+
+      setTimeout(() => {
+        msgSuccess.classList.add('hidden');
+      }, 3000);
+    });
+  </script>
+
+</body>
+</html>
